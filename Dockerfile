@@ -7,6 +7,8 @@ WORKDIR /opt
 RUN unzip acronym.zip
 RUN ln -s acronym-* acronym
 
+EXPOSE 9000
+
 CMD ["/opt/acronym/bin/acronym", "-Dplay.crypto.secret=dsfadsflkj"]
 
 
