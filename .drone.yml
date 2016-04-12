@@ -1,0 +1,27 @@
+image: tdeckers/docker-drone-sbt
+git:
+  path: github.com/tdeckers/acronym
+script:
+  - echo "build commands"
+  - sbt compile
+  - sbt test
+  - sbt dist
+publish:
+  docker:
+    dockerfile: ./Dockerfile
+    docker_host: ip.address.for.drone
+    docker_version: 1.9.1
+    registry_login_url: $$bintray_repo_login_url
+    registry_login: true
+    username: $$bintray_user
+    password: $$bintray_api_key
+    email: $$bintray_user_email
+    image_name: $$bintray_image_name
+    push_latest: true
+    tag: $DRONE_COMMIT
+notify:
+  webhook:
+    urls:
+       - "https://api.ciscoshipped.io/webhooks/drone"
+    on_success: true
+    on_failure: true
