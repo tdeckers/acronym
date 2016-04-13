@@ -22,9 +22,7 @@ publish:
     repo: $$bintray_repo
     email: $$bintray_user_email
     tag: $$COMMIT
-    
- 
- 
+
 notify:
   webhook:
     image: shippedrepos-docker-drone.bintray.io/drone-webhook
