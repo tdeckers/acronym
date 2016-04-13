@@ -1,18 +1,20 @@
-image: java:openjdk-8-jdk
+image: tdeckers/docker-drone-sbt
 git:
   path: github.com/tdeckers/acronym
 script:
   - echo "build commands"
-  - echo "no build command."
-  - echo "no test command"
+  - sbt compile
+  - sbt test
+  - sbt dist
 clone:
   path: github.com/tdeckers/acronym
 build:
-  image: java:openjdk-8-jdk
+  image: tdeckers/docker-drone-sbt
   commands:
     - echo "build commands"
-    - echo "no build command"
-    - echo "no test command"
+    - sbt compile
+    - sbt test
+    - sbt dist
 publish:
   docker:
     file: ./Dockerfile
@@ -22,7 +24,7 @@ publish:
     repo: $$bintray_repo
     email: $$bintray_user_email
     tag: $$COMMIT
-
+    
 notify:
   webhook:
     image: shippedrepos-docker-drone.bintray.io/drone-webhook
