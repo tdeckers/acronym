@@ -1,3 +1,4 @@
+*.log
 *.swp
 /RUNNING_PID
 /logs/
